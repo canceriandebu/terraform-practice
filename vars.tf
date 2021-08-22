@@ -3,8 +3,8 @@ variable "AWS_REGION" {
 }
 
 variable "AMI" {
-    type = "map" 
-    default {
+    type = map 
+    default = {
         us-west-2 = "ami-090717c950a5c34d3"
     } 
 }
