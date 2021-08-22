@@ -5,17 +5,17 @@ resource "aws_vpc" "main" {
   enable_classiclink = "false"
   instance_tenancy = "default"
 
-  tags {
+tags = {
     Name = "dev-vpc"
   }
 }
 
-resource "aws_subnet" "dev-subnet-vpc-1" {
-    vpc_id = "${aws_vpc.main.id}"
+resource "aws_subnet" "dev-public-subnet-vpc-main" {
+    vpc_id = aws_vpc.main.id
     cidr_block = "172.16.0.0/24"
     map_public_ip_on_launch = "true"
     availability_zone = "us-west-2a"
-    tags {
-        Name = "dev-subnet-vpc-1"
+    tags = {
+        Name = "dev-public-subnet-vpc-main"
     }
 }

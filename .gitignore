@@ -1,2 +1,6 @@
 .terraform
 .terraform.lock.hcl
+.terraform.tfstate.locl.info
+terraform.out
+terraform.tfstate
+terraform.tfstate.backup

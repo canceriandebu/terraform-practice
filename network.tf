@@ -1,28 +1,28 @@
 resource "aws_internet_gateway" "dev-igw" {
-  vpc_id = "${aws_vpc.main.id}"
-  tags {
+  vpc_id = aws_vpc.main.id
+  tags = {
       Name = "dev-igw"
   }
 }
 
 resource "aws_route_table" "dev-public-crt" {
-  vpc_id = "${aws_vpc.main.id}"
+  vpc_id = aws_vpc.main.id 
   route {
-      cidr_block = "172.16.0.0/24"
-      gateway_id = "${aws_internet_gateway.dev-igw.id}"
+      cidr_block = "0.0.0.0/0"
+      gateway_id = aws_internet_gateway.dev-igw.id
   }
-  tags {
+  tags = {
       Name = "dev-public-crt"
   }
 }
 
 resource "aws_route_table_association" "dev-crta-public-subnet-1" {
-  subnet_id = "${aws_subnet.dev-subnet-vpc-1.id}"
-  route_table_id = "${aws_route_table.dev-public-crt.id}"
+  subnet_id = aws_subnet.dev-public-subnet-vpc-main.id
+  route_table_id = aws_route_table.dev-public-crt.id
 }
 
 resource "aws_security_group" "dev-security-default" {
-  vpc_id = "${aws_vpc.main.id}"
+  vpc_id = aws_vpc.main.id
   egress {
       from_port = 0
       to_port = 0
@@ -41,7 +41,7 @@ resource "aws_security_group" "dev-security-default" {
       protocol = "tcp"
       cidr_blocks = ["0.0.0.0/0"]
   }
-  tags {
+    tags = {
       Name = "dev-security-default"
   }
 }
